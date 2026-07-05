@@ -4,21 +4,48 @@
   padding: 0;
 }
 
-body {
-  background: linear-gradient(90deg, #222222, #d9b28d, #222222);
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Ховаємо стандартний скролбар для плавної JS-прокрутки */
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background: #181818;
+}
+
+/* Налаштування повноінформаційних секцій */
+.page-section {
+  width: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  font-family: 'Segoe UI', Roboto, sans-serif;
-  overflow: hidden;
+  position: relative;
+  transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+  background: linear-gradient(135deg, #222222, #332920, #222222);
 }
 
+/* Підказка для скролу */
+.scroll-hint {
+  position: absolute;
+  bottom: 20px;
+  color: #d9b28d;
+  font-size: 14px;
+  opacity: 0.6;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+/* === СТИЛІ 1-ГО СЛАЙДЕРА (Твій 3D колір) === */
 .slider-container {
   position: relative;
   width: 100%;
   max-width: 450px;
-  height: 550px;
+  height: 520px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,8 +54,8 @@ body {
 .slider-wrapper {
   position: relative;
   width: 100%;
-  height: 450px;
-  perspective: 1000px; /* Додає 3D ефект */
+  height: 430px;
+  perspective: 1000px;
 }
 
 .slide {
@@ -37,11 +64,8 @@ body {
   height: 100%;
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), 
-              opacity 0.6s ease, 
-              filter 0.6s ease, 
-              z-index 0.6s ease;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease, filter 0.6s ease, z-index 0.6s ease;
   cursor: pointer;
 }
 
@@ -56,43 +80,216 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 30px;
-  background: linear-gradient(transparent, rgba(0,0,0,0.85));
+  padding: 25px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.9));
   color: white;
 }
 
 .slide-info h3 {
-  font-size: 24px;
+  font-size: 22px;
   margin-bottom: 5px;
-  font-weight: 600;
+  color: #d9b28d;
 }
 
 .slide-info p {
-  font-size: 14px;
+  font-size: 13px;
   opacity: 0.8;
 }
 
 .controls {
-  margin-top: 30px;
+  margin-top: 25px;
   display: flex;
   gap: 20px;
 }
 
 .controls button {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
-  width: 55px;
-  height: 55px;
+  background: rgba(217, 178, 141, 0.1);
+  border: 1px solid rgba(217, 178, 141, 0.3);
+  color: #d9b28d;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  font-size: 20px;
+  font-size: 18px;
   cursor: pointer;
   transition: all 0.3s ease;
   backdrop-filter: blur(5px);
 }
 
 .controls button:hover {
-  background: #ffffff;
-  color: #0f0f12;
+  background: #d9b28d;
+  color: #222222;
   transform: scale(1.1);
+}
+
+/* === СТИЛІ 2-ГО СЛАЙДЕРА (Широкий, а-ля Rozetka) === */
+.wide-container {
+  position: relative;
+  width: 92%;
+  max-width: 1100px;
+  height: 240px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  background: #1e1e1e;
+  border: 1px solid rgba(217, 178, 141, 0.15);
+}
+
+.wide-slider-wrapper {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 35px); /* Залишаємо місце під нижню лінію */
+}
+
+.wide-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+  display: flex;
+  align-items: center;
+  background: #282420; /* Фон під колір проєкту */
+}
+
+.wide-slide.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.wide-slide img {
+  position: absolute;
+  right: 10%;
+  height: 90%;
+  width: auto;
+  max-width: 50%;
+  object-fit: contain;
+  z-index: 1;
+  border-radius: 8px;
+}
+
+/* Контент поверх слайду */
+.wide-content {
+  position: relative;
+  z-index: 2;
+  padding-left: 60px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+}
+
+.wide-text h2 {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.wide-text h1 {
+  color: #d9b28d;
+  font-size: 54px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.wide-badge {
+  background: #d9b28d;
+  color: #222222;
+  font-weight: 700;
+  padding: 20px;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.2;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Бокові стрілки */
+.wide-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) translateY(-17px);
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 24px;
+  line-height: 38px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: all 0.2s ease;
+  color: #222222;
+}
+
+.wide-arrow:hover {
+  background: #d9b28d;
+  color: white;
+}
+
+.wide-arrow.left { left: 15px; }
+.wide-arrow.right { right: 15px; }
+
+/* Нижня акцентна плашка з текстом */
+.marquee-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 35px;
+  background: #d9b28d;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.marquee-track {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 20s linear infinite;
+}
+
+.marquee-track span {
+  color: #222222;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+@keyframes marquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+/* Крапки навігації */
+.wide-dots {
+  position: absolute;
+  bottom: 45px;
+  left: 60px;
+  z-index: 10;
+  display: flex;
+  gap: 8px;
+}
+
+.wide-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.wide-dot.active {
+  background: #d9b28d;
+  transform: scale(1.3);
 }

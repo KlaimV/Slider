@@ -3,69 +3,149 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3D Slider</title>
+  <title>Колекція Слайдерів</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="slider-container">
-    <div class="slider-wrapper" id="slider">
-      
-      <div class="slide active">
-        <img src="images/352-800x400.jpg" alt="Slide 1">
-        <div class="slide-info">
-          <h3>Дорога зі світла</h3>
-          <p>Щось все ж вкаже тобі дорогу</p>
+  <section class="page-section" id="section1">
+    <div class="slider-container">
+      <div class="slider-wrapper" id="slider3d">
+        <div class="slide active">
+          <img src="images/352-800x400.jpg" alt="Slide 1">
+          <div class="slide-info">
+            <h3>Дорога зі світла</h3>
+            <p>Щось все ж вкаже тобі дорогу</p>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="images/200-800x400.jpg" alt="Slide 2">
+          <div class="slide-info">
+            <h3>Корова?</h3>
+            <p>Мууууу</p>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="images/106-800x400.jpg" alt="Slide 3">
+          <div class="slide-info">
+            <h3>Велич природи</h3>
+            <p>Просто така перспектива</p>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="images/539-800x400.jpg" alt="Slide 4">
+          <div class="slide-info">
+            <h3>Магія світла</h3>
+            <p>Вікна запотіли</p>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="images/590-800x400.jpg" alt="Slide 5">
+          <div class="slide-info">
+            <h3>Сучасний мінімалізм</h3>
+            <p>Передбачає багато людей</p>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="images/939-800x400.jpg" alt="Slide 6">
+          <div class="slide-info">
+            <h3>Загублений світ</h3>
+            <p>Не змогли побудувати адекватний будинок</p>
+          </div>
         </div>
       </div>
-
-      <div class="slide">
-        <img src="images/200-800x400.jpg" alt="Slide 2">
-        <div class="slide-info">
-          <h3>Корова?</h3>
-          <p>Мууууу</p>
-        </div>
+      <div class="controls">
+        <button id="prevBtn3d">←</button>
+        <button id="nextBtn3d">→</button>
       </div>
-
-      <div class="slide">
-        <img src="images/106-800x400.jpg" alt="Slide 3">
-        <div class="slide-info">
-          <h3>Велич природи</h3>
-          <p>Просто така перспектива</p>
-        </div>
-      </div>
-
-      <div class="slide">
-        <img src="images/539-800x400.jpg" alt="Slide 4">
-        <div class="slide-info">
-          <h3>Магія світла</h3>
-          <p>Вікна запотіли</p>
-        </div>
-      </div>
-
-      <div class="slide">
-        <img src="images/590-800x400.jpg" alt="Slide 5">
-        <div class="slide-info">
-          <h3>Сучасний мінімалізм</h3>
-          <p>Передбачає багато людей</p>
-        </div>
-      </div>
-
-      <div class="slide">
-        <img src="images/939-800x400.jpg" alt="Slide 6">
-        <div class="slide-info">
-          <h3>Загублений світ</h3>
-          <p>Не змогли побудувати адекватний будинок</p>
-        </div>
-      </div>
-
     </div>
+    <div class="scroll-hint">Покрути коліщатко вниз ↓</div>
+  </section>
 
-    <div class="controls">
-      <button id="prevBtn">←</button>
-      <button id="nextBtn">→</button>
+  <section class="page-section" id="section2">
+    <div class="wide-container">
+      <div class="wide-slider-wrapper">
+        
+        <div class="wide-slide active">
+          <img src="images/352-800x400.jpg" alt="Banner 1">
+          <div class="wide-content">
+            <div class="wide-text">
+              <h2>РОЗПРОДАЖ НА САЙТІ</h2>
+              <h1>до -55%</h1>
+            </div>
+            <div class="wide-badge">2–5 ЛИПНЯ</div>
+          </div>
+        </div>
+
+        <div class="wide-slide">
+          <img src="images/200-800x400.jpg" alt="Banner 2">
+          <div class="wide-content">
+            <div class="wide-text">
+              <h2>КОРОВ'ЯЧИЙ ДРАЙВ</h2>
+              <h1>МУУУ-ЗНИЖКИ</h1>
+            </div>
+            <div class="wide-badge">АКЦІЯ МІСЯЦЯ</div>
+          </div>
+        </div>
+
+        <div class="wide-slide">
+          <img src="images/106-800x400.jpg" alt="Banner 3">
+          <div class="wide-content">
+            <div class="wide-text">
+              <h2>ВЕЛИЧ ПРИРОДИ</h2>
+              <h1>ВІДКРИЙ СВІТ</h1>
+            </div>
+            <div class="wide-badge">ЕКО ТУРИ</div>
+          </div>
+        </div>
+
+        <div class="wide-slide">
+          <img src="images/539-800x400.jpg" alt="Banner 4">
+          <div class="wide-content">
+            <div class="wide-text">
+              <h2>МАГІЯ СВІТЛА</h2>
+              <h1>ЗАТИШОК ВДОМА</h1>
+            </div>
+            <div class="wide-badge">ДЛЯ ДОМУ</div>
+          </div>
+        </div>
+
+        <div class="wide-slide">
+          <img src="images/590-800x400.jpg" alt="Banner 5">
+          <div class="wide-content">
+            <div class="wide-text">
+              <h2>МІНІМАЛІЗМ</h2>
+              <h1>ЧИСТИЙ СТИЛЬ</h1>
+            </div>
+            <div class="wide-badge">NEW IN</div>
+          </div>
+        </div>
+
+        <div class="wide-slide">
+          <img src="images/939-800x400.jpg" alt="Banner 6">
+          <div class="wide-content">
+            <div class="wide-text">
+              <h2>ЗАГУБЛЕНИЙ СВІТ</h2>
+              <h1>АРХІТЕКТУРА</h1>
+            </div>
+            <div class="wide-badge">ЕКСПЛОРЕР</div>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="wide-arrow left" id="widePrev">‹</button>
+      <button class="wide-arrow right" id="wideNext">›</button>
+
+      <div class="marquee-line">
+        <div class="marquee-track">
+          <span>ЩЕ БІЛЬШЕ БОНУСІВ • ЩЕ БІЛЬШЕ БОНУСІВ • ЩЕ БІЛЬШЕ БОНУСІВ • ЩЕ БІЛЬШЕ БОНУСІВ • ЩЕ БІЛЬШЕ БОНУСІВ • </span>
+        </div>
+      </div>
+
+      <div class="wide-dots" id="wideDots"></div>
     </div>
-  </div>
+  </section>
 
   <script src="script.js"></script>
 </body>

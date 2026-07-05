@@ -1,16 +1,40 @@
-const slides = document.querySelectorAll('.slide');
-const nextBtn = document.getElementById('nextBtn');
-const prevBtn = document.getElementById('prevBtn');
+const sections = document.querySelectorAll('.page-section');
+let currentSectionIndex = 0;
+let isScrolling = false;
 
-let currentIndex = 0;
+window.addEventListener('wheel', (e) => {
+  if (isScrolling) return;
 
-function updateSlider() {
-  slides.forEach((slide, index) => {
-    let offset = index - currentIndex;
-    
-    if (offset < 0) {
-      offset = offset + slides.length;
-    }
+  if (e.deltaY > 0 && currentSectionIndex < sections.length - 1) {
+    currentSectionIndex++;
+    changeSection();
+  } else if (e.deltaY < 0 && currentSectionIndex > 0) {
+    currentSectionIndex--;
+    changeSection();
+  }
+});
+
+function changeSection() {
+  isScrolling = true;
+  sections.forEach((section) => {
+    section.style.transform = `translateY(-${currentSectionIndex * 100}%)`;
+  });
+  
+  setTimeout(() => {
+    isScrolling = false;
+  }, 800);
+}
+
+
+const slides3d = document.querySelectorAll('#slider3d .slide');
+const nextBtn3d = document.getElementById('nextBtn3d');
+const prevBtn3d = document.getElementById('prevBtn3d');
+let index3d = 0;
+
+function updateSlider3d() {
+  slides3d.forEach((slide, index) => {
+    let offset = index - index3d;
+    if (offset < 0) offset += slides3d.length;
 
     if (offset === 0) {
       slide.style.transform = "translate3d(0, 0, 0) scale(1)";
@@ -35,14 +59,54 @@ function updateSlider() {
   });
 }
 
-nextBtn.addEventListener('click', () => {
-  currentIndex = (currentIndex + 1) % slides.length;
-  updateSlider();
+nextBtn3d.addEventListener('click', () => {
+  index3d = (index3d + 1) % slides3d.length;
+  updateSlider3d();
 });
 
-prevBtn.addEventListener('click', () => {
-  currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-  updateSlider();
+prevBtn3d.addEventListener('click', () => {
+  index3d = (index3d - 1 + slides3d.length) % slides3d.length;
+  updateSlider3d();
 });
 
-updateSlider();
+
+const wideSlides = document.querySelectorAll('.wide-slide');
+const wideNext = document.getElementById('wideNext');
+const widePrev = document.getElementById('widePrev');
+const wideDotsContainer = document.getElementById('wideDots');
+let wideIndex = 0;
+
+wideSlides.forEach((_, i) => {
+  const dot = document.createElement('div');
+  dot.classList.add('wide-dot');
+  if (i === 0) dot.classList.add('active');
+  dot.addEventListener('click', () => goToWideSlide(i));
+  wideDotsContainer.appendChild(dot);
+});
+
+const wideDots = document.querySelectorAll('.wide-dot');
+
+function updateWideSlider() {
+  wideSlides.forEach((slide, i) => {
+    slide.classList.toggle('active', i === wideIndex);
+    wideDots[i].classList.toggle('active', i === wideIndex);
+  });
+}
+
+function goToWideSlide(index) {
+  wideIndex = index;
+  updateWideSlider();
+}
+
+wideNext.addEventListener('click', () => {
+  wideIndex = (wideIndex + 1) % wideSlides.length;
+  updateWideSlider();
+});
+
+widePrev.addEventListener('click', () => {
+  wideIndex = (wideIndex - 1 + wideSlides.length) % wideSlides.length;
+  updateWideSlider();
+});
+
+updateSlider3d();
+updateWideSlider();
