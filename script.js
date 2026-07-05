@@ -39,6 +39,7 @@ const slides3d = document.querySelectorAll('#slider3d .slide');
 const nextBtn3d = document.getElementById('nextBtn3d');
 const prevBtn3d = document.getElementById('prevBtn3d');
 let index3d = 0;
+let timer3d;
 
 function updateSlider3d() {
   slides3d.forEach((slide, index) => {
@@ -68,14 +69,24 @@ function updateSlider3d() {
   });
 }
 
+function startTimer3d() {
+  clearInterval(timer3d);
+  timer3d = setInterval(() => {
+    index3d = (index3d + 1) % slides3d.length;
+    updateSlider3d();
+  }, 3000);
+}
+
 nextBtn3d.addEventListener('click', () => {
   index3d = (index3d + 1) % slides3d.length;
   updateSlider3d();
+  startTimer3d();
 });
 
 prevBtn3d.addEventListener('click', () => {
   index3d = (index3d - 1 + slides3d.length) % slides3d.length;
   updateSlider3d();
+  startTimer3d();
 });
 
 const wideSlides = document.querySelectorAll('.wide-slide');
@@ -83,6 +94,7 @@ const wideNext = document.getElementById('wideNext');
 const widePrev = document.getElementById('widePrev');
 const wideDotsContainer = document.getElementById('wideDots');
 let wideIndex = 0;
+let timerWide;
 
 wideSlides.forEach((_, i) => {
   const dot = document.createElement('div');
@@ -101,20 +113,33 @@ function updateWideSlider() {
   });
 }
 
+function startTimerWide() {
+  clearInterval(timerWide);
+  timerWide = setInterval(() => {
+    wideIndex = (wideIndex + 1) % wideSlides.length;
+    updateWideSlider();
+  }, 3000);
+}
+
 function goToWideSlide(index) {
   wideIndex = index;
   updateWideSlider();
+  startTimerWide();
 }
 
 wideNext.addEventListener('click', () => {
   wideIndex = (wideIndex + 1) % wideSlides.length;
   updateWideSlider();
+  startTimerWide();
 });
 
 widePrev.addEventListener('click', () => {
   wideIndex = (wideIndex - 1 + wideSlides.length) % wideSlides.length;
   updateWideSlider();
+  startTimerWide();
 });
 
 updateSlider3d();
 updateWideSlider();
+startTimer3d();
+startTimerWide();
