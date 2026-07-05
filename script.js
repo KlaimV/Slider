@@ -1,30 +1,39 @@
 const sections = document.querySelectorAll('.page-section');
 let currentSectionIndex = 0;
 let isScrolling = false;
+sections[currentSectionIndex].classList.add('active-section');
 
 window.addEventListener('wheel', (e) => {
   if (isScrolling) return;
+  if (Math.abs(e.deltaY) < 25) return;
 
-  if (e.deltaY > 0 && currentSectionIndex < sections.length - 1) {
-    currentSectionIndex++;
-    changeSection();
-  } else if (e.deltaY < 0 && currentSectionIndex > 0) {
-    currentSectionIndex--;
-    changeSection();
+  if (e.deltaY > 0) {
+    if (currentSectionIndex < sections.length - 1) {
+      currentSectionIndex++;
+      changeSection();
+    }
+  } else {
+    if (currentSectionIndex > 0) {
+      currentSectionIndex--;
+      changeSection();
+    }
   }
-});
+}, { passive: true });
 
 function changeSection() {
   isScrolling = true;
-  sections.forEach((section) => {
-    section.style.transform = `translateY(-${currentSectionIndex * 100}%)`;
+  sections.forEach((section, index) => {
+    if (index === currentSectionIndex) {
+      section.classList.add('active-section');
+    } else {
+      section.classList.remove('active-section');
+    }
   });
   
   setTimeout(() => {
     isScrolling = false;
   }, 800);
 }
-
 
 const slides3d = document.querySelectorAll('#slider3d .slide');
 const nextBtn3d = document.getElementById('nextBtn3d');
@@ -68,7 +77,6 @@ prevBtn3d.addEventListener('click', () => {
   index3d = (index3d - 1 + slides3d.length) % slides3d.length;
   updateSlider3d();
 });
-
 
 const wideSlides = document.querySelectorAll('.wide-slide');
 const wideNext = document.getElementById('wideNext');
